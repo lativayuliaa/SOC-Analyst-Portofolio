@@ -50,5 +50,5 @@ Sysmon Event ID 1 (Process Creation)
 
 ## References
 
-* Investigation/investigation.md
-* MITRE-Mapping/mitre-mapping.md
+* Investigation.md
+* MITRE-Mapping.md
