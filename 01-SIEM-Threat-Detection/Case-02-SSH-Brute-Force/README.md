@@ -44,5 +44,5 @@ Windows Security Event Logs were collected using Winlogbeat and analyzed in Kiba
 
 ## References
 
-* Investigation/investigation.md
-* MITRE-Mapping/mitre-mapping.md
+* Investigation.md
+* MITRE-Mapping.md
