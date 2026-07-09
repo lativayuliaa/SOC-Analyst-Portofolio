@@ -31,17 +31,18 @@ The primary objective of this project is to model real-world adversary tactics, 
 
 ## ⚔️ Simulated Attack Scenarios & Lab Workspaces
 
-| Case Folder | Security Scenario | Threat Vector | MITRE ATT&CK Mapping | Workspace Case Guide |
+
+| Case | Attack Scenario | Technique | MITRE ATT&CK | Documentation |
 | :---: | :--- | :--- | :---: | :---: |
-| **Case 01** | Network Service Discovery | Scanning / Enumeration | `T1046` | 📁 **[Explore Case 01](./Case-01-Network-Service-Discovery/)** |
-| **Case 02** | SSH Brute Force Attack | Credential Abuse / Guessing | `T1110` | 📁 **[Explore Case 02](./Case-02-SSH-Brute-Force/)** |
-| **Case 03** | PowerShell Execution | Direct Script Invocation | `T1059.001` | 📁 **[Explore Case 03](./Case-03-PowerShell-Execution/)** |
-| **Case 04** | PowerShell Download Cradle | Web Ingress Ingestion | `T1105` | 📁 **[Explore Case 04](./Case-04-PowerShell-Download-Cradle/)** |
-| **Case 05** | New User Creation | Local Credential Spawning | `T1136.001` | 📁 **[Explore Case 05](./Case-05-New-User-Creation/)** |
-| **Case 06** | LOLBins Abuse | Native System Utility Exploitation | `T1218` | 📁 **[Explore Case 06](./Case-06-LOLBins-Abuse/)** |
-| **Case 07** | Encoded PowerShell | Obfuscated Code Logic Evasion | `T1059.001` | 📁 **[Explore Case 07](./Case-07-Encoded-PowerShell/)** |
-| **Case 08** | Certutil Payload Download | Legitimate Binary Network Ingress | `T1218`, `T1105` | 📁 **[Explore Case 08](./Case-08-Certutil-Payload-Download/)** |
-| **Case 09** | Windows Service Creation | Long-term Background Execution | `T1543.003` | 📁 **[Explore Case 09](./Case-09-Windows-Service-Creation/)** |
+| **01** | Nmap Network Discovery | Network Reconnaissance | `T1046` | 📁 [Case 01](./Case-01-Nmap-Detection/) |
+| **02** | SSH Brute Force | Credential Access | `T1110` | 📁 [Case 02](./Case-02-SSH-Brute-Force/) |
+| **03** | PowerShell Execution | PowerShell | `T1059.001` | 📁 [Case 03](./Case-03-PowerShell-Execution/) |
+| **04** | PowerShell Download Cradle | Ingress Tool Transfer | `T1059.001`, `T1105` | 📁 [Case 04](./Case-04-PowerShell-Download-Cradle/) |
+| **05** | New Local User Creation | Account Persistence | `T1136.001` | 📁 [Case 05](./Case-05-New-User-Creation/) |
+| **06** | LOLBins Abuse (Certutil) | Living Off the Land | `T1218` | 📁 [Case 06](./Case-06-LOLBins-Abuse/) |
+| **07** | Encoded PowerShell | Obfuscated PowerShell | `T1059.001` | 📁 [Case 07](./Case-07-Encoded-PowerShell/) |
+| **08** | Certutil Payload Download | LOLBin Download | `T1218`, `T1105` | 📁 [Case 08](./Case-08-Certutil-Payload-Download/) |
+| **09** | Windows Service Creation | Persistence | `T1543.003` | 📁 [Case 09](./Case-09-Windows-Service-Creation/) |
 
 ---
 
