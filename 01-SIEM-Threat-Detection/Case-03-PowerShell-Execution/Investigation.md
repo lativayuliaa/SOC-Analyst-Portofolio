@@ -1,57 +1,39 @@
 # Investigation Report
 
 ## Summary
+PowerShell activity was detected on the Windows 10 host. Sysmon recorded the process creation event, granting full visibility into the runtime command-line string arguments and parent-child process relationship genealogy.
 
-PowerShell activity was detected on the Windows 10 host. Sysmon recorded the process creation event and provided visibility into the executed command line and parent-child process relationship.
+## Timeline & Log Analysis
+1. **Event Ingestion:** Filtering incoming index patterns for process creation activities inside Kibana Discover successfully returns the target execution payload logs.
+   ![Kibana Discover - PowerShell Logs](assets/ss-1-powershell-discover.png)
 
-## Timeline
+2. **Execution Pattern Spike:** Correlating the time of discovery shows the exact runtime window when the interactive commands hit the host machine.
+   ![Kibana - PowerShell Execution Timeline](assets/ss-3-powershell-timeline.png)
 
-1. User launched PowerShell.
-2. Sysmon generated Event ID 1.
-3. Winlogbeat forwarded the event to Elasticsearch.
-4. Kibana was used to investigate the process details.
+## Endpoint Indicators
 
-## Hostname
+| Indicator | Value |
+| :--- | :--- |
+| **Target Hostname** | `WINDOWS10` |
+| **Executing User** | `vboxuser` |
+| **Process Name** | `powershell.exe` |
+| **Parent Process** | `explorer.exe` |
 
-WINDOWS10
+## Evidence & Deep Dive
+The tracking foundation for this investigation is built entirely on **Sysmon Event ID 1 (Process Creation)**. Inspecting the raw expanded JSON metadata reveals critical telemetry artifacts:
 
-## User
-
-vboxuser
-
-## Process Name
-
-powershell.exe
-
-## Parent Process
-
-explorer.exe
-
-## Command Line
-
-```powershell
-powershell.exe -nop -c "Get-Process"
-```
-
-## Evidence
-
-* Sysmon Event ID 1
+![Sysmon Event ID 1 Details](assets/ss-2-powershell-event-details.png)
 
 ## Findings
+PowerShell execution was successfully parsed. The presence of evasion flags such as `-nop` (bypasses local configuration profile scripts) and `-w hidden` (conceals interactive windows) strongly mimics initial access or post-exploitation framework mechanics, marking it highly suspicious for enterprise base baselines.
 
-PowerShell execution was successfully detected and analyzed. The presence of parameters such as `-nop` and `-w hidden` may indicate suspicious activity and should be monitored closely in enterprise environments.
-
-## MITRE ATT&CK
-
-T1059.001 - PowerShell
+## MITRE ATT&CK Mapping
+- **Technique:** T1059.001 - PowerShell
 
 ## Severity
-
-Medium
+🟡 **Medium** (Standard system execution utilities used with potential evasion-oriented parameter arguments).
 
 ## Recommendations
-
-* Monitor PowerShell activity.
-* Enable Sysmon process creation logging.
-* Create alerts for suspicious PowerShell arguments.
-* Investigate hidden or encoded PowerShell commands.
+* Ensure Sysmon Process Creation (Event ID 1) logging remains enabled across all critical directory endpoints.
+* Implement alerting logic flags inside Elastic Security to capture anomalous combinations of `powershell.exe` containing string sequences like `-nop`, `-w hidden`, or `-enc` (EncodedCommand).
+* Monitor parent-child process anomalies (e.g., `w3wp.exe` or `nginx.exe` spawning `powershell.exe`).
