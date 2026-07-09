@@ -31,7 +31,7 @@ The high-frequency, sequential connection attempts targeted at multiple destinat
 * **Technique:** T1046 - Network Service Discovery
 
 ## Severity
-🔴 **Low** (Limited to reconnaissance; no successful exploit payload or data exfiltration was detected during this phase).
+🟢 **Low** (Limited to reconnaissance; no successful exploit payload or data exfiltration was detected during this phase).
 
 ## Recommendations
 * Deploy threshold-based alerting in Kibana to trigger high-priority alerts when a single source IP generates massive network connections within a few seconds.
