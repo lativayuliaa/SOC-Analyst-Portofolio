@@ -1,126 +1,106 @@
 # SIEM Threat Detection and Monitoring Lab
 
-## Overview
+## 📌 Project Overview
+This project demonstrates the end-to-end implementation of an enterprise-grade Security Information and Event Management (SIEM) telemetry system built using the **Elastic Stack**, **Sysmon**, and **Winlogbeat**. 
 
-This project demonstrates the implementation of a Security Information and Event Management (SIEM) environment using Elastic Stack, Sysmon, and Winlogbeat.
-
-The objective of this lab is to simulate real-world attack scenarios and investigate them through log analysis, detection engineering, MITRE ATT&CK mapping, and incident investigation workflows.
-
----
-
-## Lab Architecture
-
-* Host Machine
-
-  * Elastic Stack
-  * Kibana
-
-* Windows 10 VM
-
-  * Sysmon
-  * Winlogbeat
-
-* Kali Linux VM
-
-  * Attack Simulation
+The primary objective of this project is to model real-world adversary tactics, log ingestion behavior, engineering detection alerts, mapping activities to the **MITRE ATT&CK® framework**, and compiling deep-dive incident response investigation reports.
 
 ---
 
-## Technologies Used
+## 🏗️ Lab Architecture & Components
 
-* Elastic Stack
-* Kibana
-* Sysmon
-* Winlogbeat
-* Kali Linux
-* Windows 10
-* VirtualBox
-
----
-
-## Attack Scenarios
-
-| Case    | Scenario                   | MITRE ATT&CK |
-| ------- | -------------------------- | ------------ |
-| Case 01 | Network Service Discovery  | T1046        |
-| Case 02 | SSH Brute Force            | T1110        |
-| Case 03 | PowerShell Execution       | T1059.001    |
-| Case 04 | PowerShell Download Cradle | T1105        |
-| Case 05 | New User Creation          | T1136.001    |
-| Case 06 | LOLBins Abuse              | T1218        |
-| Case 07 | Encoded PowerShell         | T1059.001    |
-| Case 08 | Certutil Payload Download  | T1218, T1105 |
-| Case 09 | Windows Service Creation   | T1543.003    |
+* 💻 **Host Machine / Analytics Center**
+  * Elastic ElasticSearch (Central Log Ingestion Eng)
+  * Kibana SIEM (Visualization & Incident Hunting Interface)
+* 🛡️ **Windows 10 Enterprise (Victim Endpoint VM)**
+  * System Monitor (Sysmon) Engine — Advanced Endpoint Telemetry
+  * Winlogbeat Shipper Agent — Event Log Pipeline Data Transfer
+* ⚔️ **Kali Linux (Attacker VM)**
+  * Metasploit, Nmap, Python Staging Servers, & Custom Scripts for Threat Simulation
 
 ---
 
-## Dashboard
-
-### SOC Overview Dashboard
-
-Provides a high-level overview of security events, process activity, authentication failures, service installations, and MITRE ATT&CK coverage.
-
-### PowerShell Threat Hunting Dashboard
-
-Monitors PowerShell execution and identifies encoded commands and suspicious parent-child process relationships.
-
-### LOLBins Monitoring Dashboard
-
-Tracks the abuse of built-in Windows utilities such as PowerShell, Certutil, and Command Prompt.
-
-### Brute Force Investigation Dashboard
-
-Analyzes authentication failures, successful logins, source IP addresses, and targeted accounts.
+## 🛠️ Technologies & Ecosystem Used
+* **Elastic Stack** (Elasticsearch & Kibana Analytics)
+* **Sysmon** (Advanced Windows Logging Tool)
+* **Winlogbeat** (Log Ingestion Pipeline)
+* **VirtualBox** (Hypervisor Host Network Isolation Deployment)
+* **Kali Linux** & **Windows 10 Environment**
 
 ---
 
-## MITRE ATT&CK Coverage
+## ⚔️ Simulated Attack Scenarios & Lab Workspaces
 
-### Reconnaissance
-
-* T1046 - Network Service Discovery
-
-### Credential Access
-
-* T1110 - Brute Force
-
-### Execution
-
-* T1059.001 - PowerShell
-
-### Persistence
-
-* T1136.001 - Create Account
-* T1543.003 - Windows Service
-
-### Defense Evasion
-
-* T1218 - System Binary Proxy Execution
-
-### Command and Control
-
-* T1105 - Ingress Tool Transfer
+| Case Folder | Security Scenario | Threat Vector | MITRE ATT&CK Mapping | Workspace Case Guide |
+| :---: | :--- | :--- | :---: | :---: |
+| **Case 01** | Network Service Discovery | Scanning / Enumeration | `T1046` | 📁 **[Explore Case 01](./Case-01-Network-Service-Discovery/)** |
+| **Case 02** | SSH Brute Force Attack | Credential Abuse / Guessing | `T1110` | 📁 **[Explore Case 02](./Case-02-SSH-Brute-Force/)** |
+| **Case 03** | PowerShell Execution | Direct Script Invocation | `T1059.001` | 📁 **[Explore Case 03](./Case-03-PowerShell-Execution/)** |
+| **Case 04** | PowerShell Download Cradle | Web Ingress Ingestion | `T1105` | 📁 **[Explore Case 04](./Case-04-PowerShell-Download-Cradle/)** |
+| **Case 05** | New User Creation | Local Credential Spawning | `T1136.001` | 📁 **[Explore Case 05](./Case-05-New-User-Creation/)** |
+| **Case 06** | LOLBins Abuse | Native System Utility Exploitation | `T1218` | 📁 **[Explore Case 06](./Case-06-LOLBins-Abuse/)** |
+| **Case 07** | Encoded PowerShell | Obfuscated Code Logic Evasion | `T1059.001` | 📁 **[Explore Case 07](./Case-07-Encoded-PowerShell/)** |
+| **Case 08** | Certutil Payload Download | Legitimate Binary Network Ingress | `T1218`, `T1105` | 📁 **[Explore Case 08](./Case-08-Certutil-Payload-Download/)** |
+| **Case 09** | Windows Service Creation | Long-term Background Execution | `T1543.003` | 📁 **[Explore Case 09](./Case-09-Windows-Service-Creation/)** |
 
 ---
 
-## Skills Demonstrated
+## 📊 Security Operations Center (SOC) Dashboards
 
-* SIEM Administration
-* Log Analysis
-* Detection Engineering
-* Threat Hunting
-* MITRE ATT&CK Mapping
-* Sysmon Analysis
-* Windows Event Analysis
-* Incident Investigation
-* Dashboard Development
-* Security Monitoring
+### 1. SOC Overview Dashboard
+Provides a holistic, high-level structural overview of global endpoint security metrics, malicious threat levels, system processes anomalies, authentication log monitoring configurations, and matrix alert coverages.
+![SOC Overview Dashboard](Dashboard/soc-overview-dashboard.png)
+
+### 2. PowerShell Threat Hunting Dashboard
+Engineered explicitly to analyze deep-level script parameters, isolating runtime `-enc` or obfuscated Unicode command strings, alongside anomalous sub-process execution trees.
+![PowerShell Threat Hunting Dashboard](Dashboard/powershell-threat-hunting.png)
+
+### 3. LOLBins Monitoring Dashboard
+Monitors and traces unauthorized arguments passed down onto default system binary proxy applications such as `certutil.exe`, `sc.exe`, or administrative command environments.
+![LOLBins Monitoring Dashboard](Dashboard/lolbins-monitoring.png)
+
+### 4. Brute Force Investigation Dashboard
+Gathers remote connection behaviors, tracking systemic validation failures, authentication spikes, target administrative names, and geological source attacker IP endpoints.
+![Brute Force Investigation Dashboard](Dashboard/brute-force-investigation.png)
+
+### 5. MITRE ATT&CK Matrix Coverage Dashboard
+Maps overall environmental log ingestions against active coverage blocks inside the matrix taxonomy to support ongoing detection engineering gaps identification.
+![MITRE ATT&CK Coverage Dashboard](Dashboard/mitre-att&ck-coverage.png)
 
 ---
 
+## 🎯 Tactical MITRE ATT&CK® Matrix Framework Coverage
+
+### 🔍 Reconnaissance
+* **T1046 - Network Service Discovery:** Port scanning audits and remote service mapping.
+
+### 🔑 Credential Access
+* **T1110 - Brute Force:** Automated authentication attempts targeting protocol pathways.
+
+### ⚙️ Execution
+* **T1059.001 - PowerShell:** Interactive administrative command shell payload execution.
+
+### 📌 Persistence & Privilege Escalation
+* **T1136.001 - Create Account (Local Account):** Rogue administrative backup credential creation.
+* **T1543.003 - Create or Modify System Process (Windows Service):** Persistent system services registration.
+
+### 🛡️ Defense Evasion
+* **T1218 - System Binary Proxy Execution:** Proxying execution using legitimate native operating system processes (LOLBins).
+
+### 📡 Command and Control
+* **T1105 - Ingress Tool Transfer:** Retrieving supporting tooling vectors from remote adversary repositories.
 
 ---
 
-## Author
+## 🏆 Cyber Security Core Competencies Demonstrated
+* **SIEM Architecture Management** (Elasticsearch Cluster Optimization & Kibana Dashboard Engineering)
+* **Advanced Telemetry Ingestion Engineering** (Sysmon Rules Custom Tuning, Winlogbeat Shipping)
+* **Live Forensics & Enterprise Incident Analysis** (Windows Event Logs & Audit Parsing)
+* **Adversary Emulation & Simulation** (Replicating TTPs in Sandboxed Contexts)
+* **Defensive Mapping** (MITRE ATT&CK Framework Modeling & Rule Hardening Alignment)
 
-Built as part of a Blue Team and SOC Analyst portfolio project focusing on detection engineering, threat hunting, and incident investigation using Elastic Stack.
+---
+
+## 👤 Author & Cybersecurity Portfolio
+* **Focus Profile:** Blue Team Operations, SOC Analysis, Log Analysis, & Enterprise Threat Hunting.
+* *Developed as a practical demonstration of advanced detection engineering methodologies utilizing decentralized logging environments.*
