@@ -33,7 +33,7 @@ The high ratio of failed logins immediately preceding a single success from the 
 - **Technique:** T1110 - Brute Force
 
 ## Severity
-🔴 **Medium / High** (An attacker has successfully authenticated and gained access to an endpoint account).
+🟡 **Medium / High** (An attacker has successfully authenticated and gained access to an endpoint account).
 
 ## Recommendations
 * Enforce a strong password complexity policy across all local accounts.
