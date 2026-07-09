@@ -5,7 +5,7 @@ File download activity abusing the trusted native utility `certutil.exe` was ide
 
 ## Timeline & Log Analysis
 1. **SIEM Log Discovery:** Querying the log infrastructure inside Kibana Discover flags the telemetry fields associated with the administrative utility operation.
-   ![Kibana Discover - Certutil Download Search](assets/ss-5-certutil-download-discovery.png)
+   ![Kibana Discover - Certutil Download Search](assets/ss-5-certutil-download-discover.png)
 
 2. **Process Audit Details (Event ID 1):** Looking closer into the generated process creation event exposes the un-obfuscated command line syntax string, tracking target parameters like `-urlcache`.
    ![Sysmon Process Creation Detail](assets/ss-6-certutil-commandline.png)
