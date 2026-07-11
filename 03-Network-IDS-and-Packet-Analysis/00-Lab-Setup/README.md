@@ -1,153 +1,132 @@
 # Network IDS and Packet Analysis Lab Setup
 
-## Overview
+## 📌 Overview
 
-This lab was created to build a Network Intrusion Detection and Packet Analysis environment using Suricata and Wireshark.
+This lab demonstrates the deployment and validation of a **Network Intrusion Detection System (NIDS)** using **Suricata** alongside **Wireshark** for packet capture and network traffic analysis.
 
-The objective of the setup phase was to deploy a functional Network Intrusion Detection System (NIDS), configure detection rules, validate network visibility, and prepare the environment for attack simulations and packet-level investigations.
-
-The lab combines signature-based detection with packet analysis techniques commonly used by Security Operations Center (SOC) analysts and Incident Responders.
+The environment is prepared to detect, inspect, and analyze network-based attacks through signature-based detection and packet-level investigation.
 
 ---
 
-## Lab Environment
+## 🏗️ Lab Environment
 
-| Component        | Purpose                                   |
-| ---------------- | ----------------------------------------- |
-| Kali Linux       | Attack simulation and monitoring host     |
-| Suricata         | Network Intrusion Detection System (NIDS) |
-| Wireshark        | Packet capture and traffic analysis       |
-| Suricata Ruleset | Signature-based threat detection          |
-
----
-
-## Project Objectives
-
-* Deploy a Network Intrusion Detection System
-* Configure and update Suricata detection rules
-* Capture and analyze network traffic
-* Validate IDS alerts using packet analysis
-* Develop network security monitoring skills
-* Perform threat detection and investigation
+| Component | Role |
+| :--- | :--- |
+| **Kali Linux** | Attack Simulation & Network Monitoring |
+| **Suricata** | Network Intrusion Detection System (NIDS) |
+| **Wireshark** | Packet Capture & Protocol Analysis |
+| **Suricata Ruleset** | Signature-based Threat Detection |
 
 ---
 
-## Installation Process
+## 🛠️ Installation & Verification
 
-### Verify Suricata Installation
+### Step 1: Verify Suricata Installation
 
-The following command was used to verify the installed version:
+Verify that Suricata has been successfully installed.
 
 ```bash
 suricata --build-info
 ```
 
+The screenshot below confirms the installed Suricata version and build information.
+
+![Suricata Installed](assets/ss-1-suricata-installed.png)
+
 ---
 
-### Identify Active Network Interface
+### Step 2: Identify the Active Network Interface
 
-The active network interface was identified using:
+Identify the network interface that will be monitored by Suricata.
 
 ```bash
 ip a
 ```
 
-The selected interface was later used for packet inspection and traffic monitoring.
+The screenshot below shows the available network interfaces on the Kali Linux machine.
+
+![Network Interface](assets/ss-2-network-installed.png)
 
 ---
 
-### Update Detection Rules
+### Step 3: Update Suricata Rules
 
-Suricata detection rules were updated using:
+Update the latest Suricata detection rules.
 
 ```bash
 sudo suricata-update
 ```
 
-This ensured the IDS operated with the latest available threat signatures.
+The screenshot below shows the successful update of the Suricata ruleset.
+
+![Suricata Rules Update](assets/ss-3-suricata-rules-update.png)
 
 ---
 
-### Start Suricata
+### Step 4: Start the Suricata Engine
 
-Suricata was started on the monitored network interface:
+Launch Suricata and bind it to the selected network interface.
 
 ```bash
 sudo suricata -i <interface>
 ```
 
-The IDS engine successfully initialized and began inspecting network traffic.
+Replace `<interface>` with your active network interface (for example, `eth0`).
+
+The screenshot below shows Suricata successfully running and monitoring network traffic.
+
+![Suricata Running](assets/ss-4-suricata-running.png)
 
 ---
 
-### Verify Wireshark Installation
+### Step 5: Verify Wireshark Installation
 
-Wireshark was used as the primary packet analysis platform.
-
-The installation was verified using:
+Verify that Wireshark is installed correctly.
 
 ```bash
 wireshark --version
 ```
 
-Wireshark was later used to:
+The screenshot below confirms the installed Wireshark version.
 
-* Analyze captured packets
-* Validate IDS alerts
-* Identify network indicators
-* Investigate suspicious traffic
+![Wireshark Version](assets/ss-5-wireshark-version.png)
 
 ---
 
-## Validation
+## ✅ Deployment Validation
 
-The following checks were successfully completed:
+The lab deployment was verified using the following validation steps:
 
-* Suricata installation verified
-* Active network interface identified
-* Detection rules updated
-* IDS engine started successfully
-* Packet inspection enabled
-* Wireshark installation verified
-* Packet capture functionality confirmed
+- ✅ Suricata successfully installed
+- ✅ Active network interface identified
+- ✅ Suricata rules updated successfully
+- ✅ Suricata engine running and monitoring traffic
+- ✅ Wireshark installed and ready for packet analysis
 
 ---
 
-## Skills Demonstrated
+## 🛠️ Skills Demonstrated
 
-### Network Security Monitoring
-
-* IDS Deployment
-* Network Visibility
-* Signature-Based Detection
-* Traffic Monitoring
-
-### Packet Analysis
-
-* Packet Inspection
-* Protocol Analysis
-* Traffic Validation
-* IOC Identification
-
-### Linux Administration
-
-* Service Management
-* Interface Analysis
-* Security Tool Deployment
+- Network Intrusion Detection System (NIDS)
+- Suricata Installation & Configuration
+- Signature-Based Detection
+- Network Interface Monitoring
+- Suricata Rule Management
+- Packet Capture
+- Network Protocol Analysis
+- Wireshark
+- Threat Detection
+- Network Traffic Analysis
 
 ---
 
-## Outcome
+## 🚀 Next Steps
 
-The Network IDS and Packet Analysis environment was successfully deployed and validated.
+With the monitoring environment successfully deployed, the lab is ready for simulated attack scenarios, including:
 
-The lab is now prepared for attack simulations and investigations including:
-
-* Nmap Scan Detection
-* SSH Brute Force Detection
-* Suspicious DNS Activity
-* File Download Detection
-* Reverse Shell Detection
-* Packet Investigation and IOC Extraction
-
----
+- Nmap Network Scanning Detection
+- SSH Brute Force Detection
+- DNS Traffic Analysis
+- HTTP Traffic Analysis
+- Malicious File Download Detection
+- Command and Control (C2) Traffic Analysis
