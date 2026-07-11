@@ -1,31 +1,31 @@
 # SOAR Workflow
 
 ## Workflow Overview
-
-The SOAR workflow consists of five major stages.
+The SOAR workflow consists of five major stages that process host telemetry into automated infrastructure updates.
 
 ---
 
 ## 1. Event Collection
-
 Windows Security Events are collected from Elasticsearch using the n8n Elasticsearch node.
 
-Examples:
+![Elasticsearch Security Events Log Stream](assets/ss-02-elastic-events.png)
 
-- Event ID 4625
-- Event ID 4720
-- Event ID 4104
+Examples tracked:
+- Event ID 4625 (Failed Login)
+- Event ID 4720 (New User Created)
+- Event ID 4104 (Encoded PowerShell)
 
 ---
 
 ## 2. Risk Score Calculation
+Each event is assigned a risk score according to predefined detection rules to establish threat prioritization.
 
-Each event is assigned a risk score according to predefined detection rules.
+![n8n Risk Score Engine Node](assets/ss-03-risk-score.png)
 
-Example:
+Example parameters applied:
 
 | Event | Risk Score |
-|--------|-----------:|
+| :--- | :---: |
 | Failed Login | 40 |
 | New User Created | 60 |
 | Encoded PowerShell | 90 |
@@ -34,75 +34,74 @@ Example:
 ---
 
 ## 3. Event Classification
+The workflow separates events into two specialized processing branches depending on metadata structure.
 
-The workflow separates events into two branches.
+### Branch 1: Failed Login (4625) → Brute Force Correlation
+Isolates authentication errors to establish aggregation metrics:
 
-### Branch 1
-
-Failed Login (4625)
-
-↓
-
-Brute Force Correlation
-
-↓
-
-Threshold Detection
+![n8n Aggregate Failed Logins Engine](assets/ss-05-aggregate-failed-logins.png)
 
 ---
 
-### Branch 2
+### Branch 2: Risk Score → High Risk Detection
+Checks incoming records to find events scoring above the response floor:
 
-Risk Score
-
-↓
-
-High Risk Detection
+![n8n Risk Score Heuristic Evaluation](assets/ss-04-risk-score-60.png)
 
 ---
 
 ## 4. Incident Creation
-
 When a detection rule is triggered, n8n automatically creates a Jira Security Incident.
 
-Incident information includes:
+![n8n Create Security Incident Jira Integration](assets/ss-09-create-security-incident.png)
 
+Incident information compiled includes:
 - Severity
 - Hostname
 - Username
 - MITRE ATT&CK Technique
-- Findings
+- Analytical Findings
+
+The resulting structural ticket populates the operational queue inside Jira:
+
+![Jira Generated Security Incident Ticket Overview](assets/ss-10-jira-incident.png)
 
 ---
 
 ## 5. Automated Response
+After creating the Jira incident, an HTTP Request node sends the detection information to a local Python Flask API.
 
-After creating the Jira incident, an HTTP Request sends the detection information to a Python Flask API.
+![n8n Automated HTTP Response Execution](assets/ss-08-automated-response.png)
 
-The API executes a PowerShell command that performs the configured response action.
+The API executes a PowerShell command that performs the configured response action:
 
-Current implementation:
+* **Current implementation:** Disable Local User Account (Proof of Concept).
 
-- Disable Local User (Proof of Concept)
+Upon full execution, n8n logs a successful cycle output across all steps:
+
+![n8n Successful Workflow Execution Flow](assets/ss-11-n8n-success.png)
 
 ---
 
 ## Workflow Summary
 
-```
+```text
 Elastic
-   │
+│
+▼
 Risk Score
-   │
+│
+▼
 Event Classification
-   │
-───────────────
-│             │
+│
+├───────────────┐
+│               │
+▼               ▼
 Brute Force   High Risk
-│             │
-──────┬────────
-      ▼
+│               │
+└──────┬────────┘
+       ▼
 Create Jira
-      ▼
+       ▼
 Automated Response
 ```
